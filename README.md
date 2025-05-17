@@ -1,51 +1,209 @@
-# Rush Hour Puzzle Solver
+# Penyelesaian Puzzle Rush Hour
 
-Tugas Kecil 3 IF2211 Strategi Algoritma
+<img src="src/public/images/maincar.png" width="100px" align="left">
 
-bang, udah bang... gakuat, cukup dengan tubes/tucilnya 
+### `Tugas Kecil 3 IF2211 Strategi Algoritma`
+
+[![Next.js](https://img.shields.io/badge/Next.js-13.0-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-18.0-blue)](https://reactjs.org/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow)](https://www.javascript.com/)
+
+✨ Aplikasi interaktif untuk menyelesaikan puzzle Rush Hour mengimplementasikan berbagai algoritma pathfinding seperti Greedy Best First Search, Uniform Cost Search (UCS), dan A*. Visualisasikan dan bandingkan berbagai strategi pencarian untuk menemukan solusi optimal agar mobil utama bisa keluar dari kemacetan!
+
+<!-- <div>
+  <a href="#-instalasi">
+    Instalasi
+  </a>
+  •
+  <a href="#-penggunaan">
+    Penggunaan
+  </a>
+  •
+  <a href="#-dokumentasi">
+    Dokumentasi
+  </a>
+  •
+  <a href="#-fitur">
+    Fitur
+  </a>
+</div> -->
+
+## 📋 Deskripsi
+
+Rush Hour adalah permainan puzzle logika berbasis grid yang menantang pemain untuk menggeser kendaraan di dalam sebuah kotak agar mobil utama (biasanya berwarna merah) dapat keluar dari kemacetan melalui pintu keluar di sisi papan. Proyek ini mengimplementasikan beberapa algoritma pathfinding untuk secara otomatis menyelesaikan puzzle dengan jumlah langkah seminimal mungkin.
+
+Aplikasi ini memiliki fitur:
+- Antarmuka GUI berbasis web yang interaktif dibangun dengan Next.js dan React
+- Implementasi beberapa algoritma pathfinding (Greedy Best First Search, UCS, A*)
+- Berbagai fungsi heuristik untuk memandu pencarian
+- Visualisasi langkah-langkah solusi dengan animasi pergerakan
+- Analisis performa yang membandingkan efisiensi algoritma
+
+## 🔧 Instalasi
+
+### Prasyarat
+
+- Node.js (v18.0.0 atau lebih tinggi)
+- npm (v9.0.0 atau lebih tinggi)
+
+### Setup
+
+1. Clone repository:
+```bash
+git clone https://github.com/yourusername/Tucil3_13523009.git
+cd Tucil3_13523009
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Jalankan server development:
+```bash
+npm run dev
+```
+
+4. Buka [http://localhost:3000](http://localhost:3000) di browser Anda untuk melihat aplikasi.
+
+## 💻 Penggunaan
+
+### Antarmuka Web
+
+1. **Halaman Utama**: Menampilkan antarmuka utama dengan opsi untuk:
+   - Mengunggah file konfigurasi puzzle
+   - Memilih test case yang telah ditentukan
+   - Memilih algoritma dan heuristik
+
+2. **Halaman Game**: Memvisualisasikan puzzle dan solusi:
+   - Menampilkan papan dengan semua kendaraan
+   - Menampilkan langkah-langkah pergerakan dengan animasi
+   - Menyediakan statistik tentang kualitas solusi dan performa algoritma
+
+3. **Halaman Pembuat**: Informasi tentang tim di balik proyek ini
+<!-- 
+### Format File Input
+
+Program menerima konfigurasi puzzle dalam file teks dengan format berikut:
+```
+A B       # Dimensi grid AxB
+N         # Jumlah kendaraan selain primary piece
+[grid]    # Konfigurasi grid
+```
+
+Dimana dalam grid:
+- `P` mewakili primary piece (kendaraan utama)
+- `K` mewakili pintu keluar
+- `.` mewakili sel kosong
+- Huruf/karakter lain mewakili kendaraan yang berbeda
+
+Contoh:
+```
+6 6
+12
+AAB..F
+..BCDF
+GPPCDFK
+GH.III
+GHJ...
+LLJMM.
+``` -->
+
+## 🌟 Fitur
+
+### Algoritma yang Diimplementasikan
+
+- **Greedy Best First Search**: Menggunakan fungsi heuristik untuk memperkirakan jalur terbaik menuju solusi
+- **Uniform Cost Search (UCS)**: Mengeksplorasi jalur berdasarkan total biaya dari titik awal
+- **A* Search**: Menggabungkan UCS dan evaluasi heuristik untuk pencarian yang efisien
+<!-- 
+### Heuristik
+
+- **Manhattan Distance**: Memperkirakan jarak antara mobil utama dan pintu keluar
+- **Blocking Pieces**: Menghitung jumlah kendaraan yang menghalangi antara mobil utama dan pintu keluar
+
+### Analisis Performa
+
+Program menghasilkan:
+- Jumlah state/gerakan yang diperiksa
+- Waktu eksekusi
+- Jalur menuju solusi dengan langkah minimal
+- Visualisasi animasi langkah-langkah solusi
+
+## 📊 Test Case
+
+Direktori `test` berisi beberapa konfigurasi puzzle dengan tingkat kesulitan yang bervariasi:
+- Puzzle sederhana dengan sedikit kendaraan
+- Puzzle tingkat kesulitan menengah dengan jumlah kendaraan moderat
+- Puzzle kompleks dengan banyak kendaraan dalam konfigurasi yang padat -->
+
+## ⚡ Performa
+
+Setiap algoritma memiliki performa yang berbeda tergantung pada konfigurasi puzzle:
+- **Greedy**: Paling cepat tetapi mungkin tidak selalu menemukan solusi optimal
+- **UCS**: Menjamin solusi optimal tetapi mungkin lebih lambat pada puzzle kompleks
+- **A***: Sering memberikan keseimbangan terbaik antara kecepatan dan optimalitas
+
+## 🔍 Struktur Proyek
 
 ```
 Tucil3_13523009/
-├── README.md
-├── .gitignore
-├── package.json
-├── next.config.js
-├── bin/              
-├── doc/                
-├── test/             
-│   └── test1.txt
-└── src/               
-    ├── app/            
-    │   ├── page.js     # Home page (homepage)
-    │   ├── layout.js   # Root layout
-    │   ├── globals.css # Global styles
-    │   ├── game/       # Game page
-    │   │   └── page.js # Game interface
-    │   └── creators/   # Creators page
-    │       └── page.js # Team information
-    ├── components/     # Reusable UI components
-    │   ├── index.js    # Exports all components
-    │   ├── Button.js   # Button components
-    │   ├── Board.js    # Game board component
-    │   ├── Piece.js    # Piece component for cars/vehicles
-    │   ├── Typography.js # Standardized text components
-    │   └── NavBar.js   # Navigation bar component
-    ├── lib/            # Core logic
-    │   ├── index.js    # Exports core utilities and models
-    │   ├── models.js   # Models (Board, Piece, GameState)
-    │   ├── algorithms/
-    │   │   ├── index.js    # Exports all algorithms
-    │   │   ├── Greedy.js   # Greedy Best First Search
-    │   │   ├── UCS.js      # Uniform Cost Search
-    │   │   └── AStar.js    # A* algorithm
-    │   ├── heuristics/
-    │   │   ├── index.js    # Exports all heuristics
-    │   │   ├── ManhattanDistance.js # Manhattan distance heuristic
-    │   │   └── BlockingPieces.js    # Blocking pieces heuristic
-    │   └── utils.js         
-    └── public/         
-        └── images/
-            ├── car.svg     
-            ├── truck.svg    
-            └── exit.svg    
+├── README.md              # File ini
+├── .gitignore             # File Git ignore
+├── package.json           # Dependensi proyek
+├── next.config.js         # Konfigurasi Next.js
+├── bin/                   # File executable
+├── doc/                   # Dokumentasi
+├── test/                  # Test case
+└── src/                   # Kode sumber
+    ├── app/               # Aplikasi Next.js
+    ├── components/        # Komponen React
+    ├── lib/               # Logika inti dan algoritma
+    └── public/            # Aset statis
 ```
+
+struktur projek lebih detail bisa dilihat di bawah
+```
+src/               
+├── app/            
+│   ├── page.js     # Home page (homepage)
+│   ├── layout.js   # Root layout
+│   ├── globals.css # Global styles
+│   ├── game/       # Game page
+│   │   └── page.js # Game interface
+│   └── creators/   # Creators page
+│       └── page.js # Team information
+├── components/     # Reusable UI components
+│   ├── index.js    # Exports all components
+│   ├── Button.js   # Button components
+│   ├── Board.js    # Game board component
+│   ├── Piece.js    # Piece component for cars/vehicles
+│   ├── Typography.js # Standardized text components
+│   └── NavBar.js   # Navigation bar component
+├── lib/            # Core logic
+│   ├── index.js    # Exports core utilities and models
+│   ├── models.js   # Models (Board, Piece, GameState)
+│   ├── algorithms/
+│   │   ├── index.js    # Exports all algorithms
+│   │   ├── Greedy.js   # Greedy Best First Search
+│   │   ├── UCS.js      # Uniform Cost Search
+│   │   └── AStar.js    # A* algorithm
+│   ├── heuristics/
+│   │   ├── index.js    # Exports all heuristics
+│   │   ├── ManhattanDistance.js # Manhattan distance heuristic
+│   │   └── BlockingPieces.js    # Blocking pieces heuristic
+│   └── utils.js         
+└── public/         
+```
+
+
+## 👨‍💻 Penulis
+
+- **13523009** - *13523009* - [Profil GitHub](https://github.com/SayyakuHajime)
+
+
+<!-- ## 🙏 Ucapan Terima Kasih
+
+- Mata kuliah IF2211 Strategi Algoritma di Institut Teknologi Bandung
+- [ThinkFun](https://www.thinkfun.com/) untuk permainan puzzle Rush Hour original
+- [Next.js](https://nextjs.org/) framework untuk antarmuka web -->
