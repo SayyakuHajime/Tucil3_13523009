@@ -152,14 +152,17 @@ Tucil3_13523009/
 ├── .gitignore             # File Git ignore
 ├── package.json           # Dependensi proyek
 ├── next.config.js         # Konfigurasi Next.js
+├── tailwind.config.js     # Konfigurasi Tailwind CSS
+├── postcss.config.mjs     # Konfigurasi PostCS
+├── utils.js       
 ├── bin/                   # File executable
 ├── doc/                   # Dokumentasi
 ├── test/                  # Test case
+├── public/                # Aset statis
 └── src/                   # Kode sumber
     ├── app/               # Aplikasi Next.js
     ├── components/        # Komponen React
-    ├── lib/               # Logika inti dan algoritma
-    └── public/            # Aset statis
+    └── lib/               # Logika inti dan algoritma
 ```
 
 struktur projek lebih detail bisa dilihat di bawah
@@ -174,26 +177,28 @@ src/
 │   └── creators/   # Creators page
 │       └── page.js # Team information
 ├── components/     # Reusable UI components
-│   ├── index.js    # Exports all components
-│   ├── Button.js   # Button components
-│   ├── Board.js    # Game board component
-│   ├── Piece.js    # Piece component for cars/vehicles
-│   ├── Typography.js # Standardized text components
-│   └── NavBar.js   # Navigation bar component
-├── lib/            # Core logic
-│   ├── index.js    # Exports core utilities and models
-│   ├── models.js   # Models (Board, Piece, GameState)
-│   ├── algorithms/
-│   │   ├── index.js    # Exports all algorithms
-│   │   ├── Greedy.js   # Greedy Best First Search
-│   │   ├── UCS.js      # Uniform Cost Search
-│   │   └── AStar.js    # A* algorithm
-│   ├── heuristics/
-│   │   ├── index.js    # Exports all heuristics
-│   │   ├── ManhattanDistance.js # Manhattan distance heuristic
-│   │   └── BlockingPieces.js    # Blocking pieces heuristic
-│   └── utils.js         
-└── public/         
+│   ├── Button.js      
+│   ├── Typography.js  
+│   ├── NavBar.js      
+│   └── RushHour/      # Komponen khusus game Rush Hour
+│       ├── Board.js   # Komponen papan permainan
+│       ├── Piece.js   # Komponen untuk kendaraan
+│       ├── Controls.js # Kontrol algoritma dan heuristik
+│       ├── Stats.js   # Komponen statistik hasil
+│       ├── FileInput.js # Komponen upload file puzzle
+│       └── index.js   # Export semua komponen
+└── lib/            # Core logic
+    ├── models.js   # Models (Board, Piece, GameState)
+    ├── algorithms/
+    │   ├── index.js    # Exports all algorithms
+    │   ├── Greedy.js   # Greedy Best First Search
+    │   ├── UCS.js      # Uniform Cost Search
+    │   └── AStar.js    # A* algorithm
+    └── heuristics/
+        ├── index.js    # Exports all heuristics
+        ├── ManhattanDistance.js # Manhattan distance heuristic
+        └── BlockingPieces.js    # Blocking pieces heuristic
+ 
 ```
 
 
