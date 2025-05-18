@@ -1,7 +1,7 @@
 // components/RushHour/FileInput.js
 import React from "react";
 import { SubheadingRed } from "../Typography";
-import { readRushHourFile } from "@/utils";
+import { readRushHourFile } from "@utils";
 
 export default function FileInput({ onFileLoad }) {
   const handleFileChange = async (e) => {

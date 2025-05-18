@@ -1,4 +1,4 @@
-import { cn } from "@/utils";
+import { cn } from "@utils";
 
 export const Heading = ({ children, className }) => (
   <h1 className={cn("text-3xl font-bold text-secondary font-baloo text-center", className)}>
