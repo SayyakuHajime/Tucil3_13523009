@@ -163,7 +163,7 @@ export function validatePuzzleConfig(config) {
   }
 
     // Check for unsolvable configurations
-  if (!isSolvablePath(config)) {
+  if (!isPieceBetweenPrimaryAndExit(config)) {
     return false;
   }
   
@@ -237,7 +237,7 @@ export function validateExitPosition(config) {
  * @param {Object} config - The puzzle configuration
  * @returns {boolean} Returns true if puzzle is solvable, false if unsolvable
  */
-export function isSolvablePath(config) {
+export function isPieceBetweenPrimaryAndExit(config) {
   const { board, size } = config;
   const [rows, cols] = size;
   
