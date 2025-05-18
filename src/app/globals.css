@@ -2,10 +2,10 @@
 
 :root {
   --background: #0b0d25;
-  --foreground: #ffffff;
+  --foreground: #e5e5e5;
   --primary: #2b5aa6;
   --primary-hover: #3d207d;
-  --secondary: #a8abff;
+  --secondary: #91a7ff;
   --secondary-hover: #8b92fd;
 }
 
