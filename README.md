@@ -153,8 +153,7 @@ Tucil3_13523009/
 ├── package.json           # Dependensi proyek
 ├── next.config.js         # Konfigurasi Next.js
 ├── tailwind.config.js     # Konfigurasi Tailwind CSS
-├── postcss.config.mjs     # Konfigurasi PostCS
-├── utils.js       
+├── postcss.config.mjs     # Konfigurasi PostCS 
 ├── bin/                   # File executable
 ├── doc/                   # Dokumentasi
 ├── test/                  # Test case
@@ -163,6 +162,8 @@ Tucil3_13523009/
     ├── app/               # Aplikasi Next.js
     ├── components/        # Komponen React
     └── lib/               # Logika inti dan algoritma
+    └── utils.js
+
 ```
 
 struktur projek lebih detail bisa dilihat di bawah
@@ -171,31 +172,31 @@ src/
 ├── app/            
 │   ├── page.js     # Home page (homepage)
 │   ├── layout.js   # Root layout
-│   ├── globals.css # Global styles
+│   ├── globals.css 
 │   ├── game/       # Game page
-│   │   └── page.js # Game interface
-│   └── creators/   # Creators page
-│       └── page.js # Team information
+│   │   └── page.js 
+│   └── creator/    # Creator page
+│       └── page.js 
 ├── components/     # Reusable UI components
 │   ├── Button.js      
 │   ├── Typography.js  
 │   ├── NavBar.js      
-│   └── RushHour/      # Komponen khusus game Rush Hour
-│       ├── Board.js   # Komponen papan permainan
-│       ├── Piece.js   # Komponen untuk kendaraan
-│       ├── Controls.js # Kontrol algoritma dan heuristik
-│       ├── Stats.js   # Komponen statistik hasil
+│   └── RushHour/        # Komponen khusus game Rush Hour
+│       ├── Board.js     # Komponen papan permainan
+│       ├── Piece.js     # Komponen untuk kendaraan
+│       ├── Controls.js  # Kontrol algoritma dan heuristik
+│       ├── Stats.js     # Komponen statistik hasil
 │       ├── FileInput.js # Komponen upload file puzzle
-│       └── index.js   # Export semua komponen
-└── lib/            # Core logic
-    ├── models.js   # Models (Board, Piece, GameState)
+│       └── index.js     # Export semua komponen
+└── lib/                # Core logic
+    ├── models.js        # Models (Board, Piece, GameState)
     ├── algorithms/
-    │   ├── index.js    # Exports all algorithms
-    │   ├── Greedy.js   # Greedy Best First Search
-    │   ├── UCS.js      # Uniform Cost Search
-    │   └── AStar.js    # A* algorithm
+    │   ├── index.js     # Exports all algorithms
+    │   ├── Greedy.js    # Greedy Best First Search
+    │   ├── UCS.js       # Uniform Cost Search
+    │   └── AStar.js     # A* algorithm
     └── heuristics/
-        ├── index.js    # Exports all heuristics
+        ├── index.js             # Exports all heuristics
         ├── ManhattanDistance.js # Manhattan distance heuristic
         └── BlockingPieces.js    # Blocking pieces heuristic
  
