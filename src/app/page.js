@@ -14,7 +14,7 @@ export default function Page() {
       
       <div className="flex flex-col items-center justify-center mt-32 mb-8">
         <Image
-          src="/images/maincar.png" 
+          src="/images/rushhour_logo.png" 
           alt="Rush Hour Solver Logo"
           width={300}
           height={300}

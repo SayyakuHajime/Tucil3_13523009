@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { NavBar } from "@/components/NavBar";
-import { Heading, Paragraph } from "@/components/Typography";
+import { Heading, Paragraph, SubheadingRed } from "@/components/Typography";
 
 export default function CreatorsPage() {
   return (
@@ -10,26 +10,33 @@ export default function CreatorsPage() {
       
       <div className="max-w-4xl mx-auto mt-24 mb-16">
         <Heading className="mb-8">
-          The Team Behind Rush Hour Solver
+          The Person Behind This Project
         </Heading>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <CreatorCard 
-            name="Your Name"
+            name="M Hazim R Prajoda"
             nim="13523009"
-            image="/images/profile.jpg" // Add your profile image
-            role="Developer"
-            description="Responsible for implementing the pathfinding algorithms and developing the web interface."
+            image="/images/car.png" 
+            role="Creator"
+            description="ngerjain tubes terus sampe jam 4 pagi ini ciri khasnya ni 
+            tubes yeyeye tubes tucil tubes tucil tubes tucil tubes tucil, 
+            woi magrib magrib oke shalat,
+            tubes tucil tubes tucil isya ok,
+            makan woo makan cepet dirumah aja
+            breeet secepat kilat
+            ngerjain tubes ngerjain tucil
+            wlu wlu wlu wlu buk buk wlu wlu wlu,
+            subuh baru tidur... ngejerjain tubes dari magrib, sampe subuh... stroke.
+            "
           />
-          
-          {/* Add more team members if needed */}
         </div>
       </div>
       
       <div className="max-w-4xl mx-auto my-8 p-6 bg-secondary rounded-xl shadow-md">
-        <Heading className="mb-4 text-xl">About the Project</Heading>
-        <Paragraph className="text-left">
-          This project was developed as part of the IF2211 Algorithm Strategies course at Institut Teknologi Bandung.
+        <SubheadingRed className="mb-4 text-xl">About the Project</SubheadingRed>
+        <Paragraph className="text-center italic">
+          This project was developed as part of the IF2211 Strategi Algoritma course at Institut Teknologi Bandung.
           The goal was to implement various pathfinding algorithms to solve the Rush Hour puzzle game and compare
           their effectiveness and efficiency. The project features a web-based interface built with Next.js and React,
           allowing users to visualize how different algorithms find solutions.

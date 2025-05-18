@@ -6,7 +6,7 @@ export const NavBar = () => {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "Game", link: "/game" },
-    { name: "Creators", link: "/creators" },
+    { name: "Creator", link: "/creator" },
   ];
 
   return (
