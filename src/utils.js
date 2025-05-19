@@ -16,7 +16,32 @@ export function parseRushHourFile(content) {
     const lines = content.split('\n');
     const [rows, cols] = lines[0].split(' ').map(Number);
     const vehicleCount = parseInt(lines[1]);
-    const board = lines.slice(2, 2 + rows);
+    
+    let board = [];
+    
+    // Option 1: Board is represented as multiple lines (original format)
+    if (lines.length >= 2 + rows) {
+      board = lines.slice(2, 2 + rows);
+      
+      // Validate that each row has the correct length
+      if (board.some(row => row.length !== cols)) {
+        throw new Error("Board rows must have length equal to column count");
+      }
+    }
+    // Option 2: Board is represented as one line
+    else if (lines.length === 3 && lines[2].length === rows * cols) {
+      const boardData = lines[2];
+      // Split the single line into rows
+      for (let i = 0; i < rows; i++) {
+        const start = i * cols;
+        const end = start + cols;
+        board.push(boardData.substring(start, end));
+      }
+    }
+    // Invalid format
+    else {
+      throw new Error("Invalid board format. Must be either multi-line or single-line representation.");
+    }
     
     // Find primary piece and exit
     let primaryPiece = { id: 'P', orientation: null, position: [] };
@@ -68,7 +93,7 @@ export function parseRushHourFile(content) {
     };
   } catch (error) {
     console.error("Error parsing file:", error);
-    throw new Error("Invalid file format. Please check the file and try again.");
+    throw new Error(`Invalid file format: ${error.message}`);
   }
 }
 
