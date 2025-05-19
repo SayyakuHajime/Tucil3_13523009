@@ -205,11 +205,14 @@ src/
 
 ## 👨‍💻 Penulis
 
-- **13523009** - *13523009* - [Profil GitHub](https://github.com/SayyakuHajime)
+- **13523009** - *M Hazim R Prajoda* - [SayyakuHajime](https://github.com/SayyakuHajime)
 
+<div align="center">
+<img src="https://github.com/user-attachments/assets/a74c896c-bda1-46e1-b409-cdb473e02fda" width="200px">
+</div>
 
-<!-- ## 🙏 Ucapan Terima Kasih
+## 🙏 Ucapan Terima Kasih
 
 - Mata kuliah IF2211 Strategi Algoritma di Institut Teknologi Bandung
 - [ThinkFun](https://www.thinkfun.com/) untuk permainan puzzle Rush Hour original
-- [Next.js](https://nextjs.org/) framework untuk antarmuka web -->
+- [Next.js](https://nextjs.org/) framework untuk antarmuka web
