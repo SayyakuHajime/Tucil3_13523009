@@ -3,9 +3,10 @@
 import { useState } from "react";
 import NavBar from "@/components/NavBar";
 import { Heading, Paragraph } from "@/components/Typography";
-import { Board, Controls, Stats, FileInput } from "@/components/RushHour";
+import { Board, Controls, Stats, PuzzleInput } from "@/components/RushHour/";
 
 export default function GamePage() {
+  // State variables
   const [boardConfig, setBoardConfig] = useState(null);
   const [algorithm, setAlgorithm] = useState("astar");
   const [heuristic, setHeuristic] = useState("manhattan");
@@ -14,7 +15,7 @@ export default function GamePage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [stats, setStats] = useState(null);
   
-  const handleFileLoad = (data) => {
+  const handlePuzzleLoad = (data) => {
     setBoardConfig(data);
     setSolution(null);
     setCurrentStep(0);
@@ -61,9 +62,11 @@ export default function GamePage() {
           </Paragraph>
         </header>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <FileInput onFileLoad={handleFileLoad} />
+        {/* Two-column layout */}
+        <div className="grid grid-cols-2 md:grid-cols-7 gap-10">
+          {/* Left column - Inputs and Controls */}
+          <div className="space-y-6 md:col-span-3">
+            <PuzzleInput onPuzzleLoad={handlePuzzleLoad} />
             
             <Controls 
               algorithm={algorithm}
@@ -83,14 +86,24 @@ export default function GamePage() {
             {stats && <Stats stats={stats} />}
           </div>
           
-          <div>
-            {boardConfig && (
+          {/* Right column - Board visualization */}
+          <div className="flex items-center justify-center md:col-span-4">
+            {boardConfig ? (
               <Board 
                 size={boardConfig.size} 
                 configuration={boardConfig.board}
+                primaryPiece="P"
+                exit="K"
                 moves={solution?.moves || []}
-                currentStep={currentStep}
+                currentMove={currentStep}
               />
+            ) : (
+              <div className="bg-secondary rounded-xl p-10 text-center">
+                <p className="text-primary font-bold">No puzzle loaded</p>
+                <p className="text-secondary-foreground text-sm mt-2">
+                  Use one of the input methods on the left to start
+                </p>
+              </div>
             )}
           </div>
         </div>
