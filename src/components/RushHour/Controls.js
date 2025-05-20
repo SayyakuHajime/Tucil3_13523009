@@ -1,4 +1,4 @@
-// components/RushHour/Controls.js
+// Modified Controls.js component with Export Solution button
 import React from "react";
 import { PrimaryButton, SecondaryButton } from "../Button";
 
@@ -10,6 +10,7 @@ export default function Controls({
   onSolve,
   solving,
   solutionControls,
+  onExportSolution, 
 }) {
   const algorithms = [
     { id: "greedy", name: "Greedy" },
@@ -27,10 +28,10 @@ export default function Controls({
     <div className="space-y-6">
       {/* Algorithm Selection */}
       <div className="w-full flex flex-col items-center gap-2">
-        <h2 className="font-bold text-secondary font-baloo text-center">
+        <h2 className="font-bold text-indigo-300 font-baloo text-center">
           Algorithm
         </h2>
-        <div className="flex bg-secondary rounded-lg border border-secondary p-1 gap-2 w-fit">
+        <div className="flex bg-[#334155] rounded-md p-1 gap-2 w-fit">
           {algorithms.map((algo) => (
             <button
               key={algo.id}
@@ -39,7 +40,7 @@ export default function Controls({
                 px-4 py-2 font-bold text-sm rounded-lg font-poppins transition-all duration-150 cursor-pointer
                 ${
                   algorithm === algo.id
-                    ? "bg-primary text-secondary border border-primary"
+                    ? "bg-primary text-white border border-primary"
                     : "text-primary"
                 }
               `}
@@ -53,10 +54,10 @@ export default function Controls({
       {/* Heuristic Selection - only show for relevant algorithms */}
       {(algorithm === "greedy" || algorithm === "astar") && (
         <div className="w-full flex flex-col items-center gap-2">
-          <h2 className="font-bold text-secondary font-baloo text-center">
+          <h2 className="font-bold text-indigo-300 font-baloo text-center">
             Heuristic
           </h2>
-          <div className="flex bg-secondary rounded-lg border border-secondary p-1 gap-2 w-fit">
+          <div className="flex bg-[#334155] rounded-md p-1 gap-2 w-fit">
             {heuristics.map((h) => (
               <button
                 key={h.id}
@@ -65,7 +66,7 @@ export default function Controls({
                   px-4 py-2 font-bold text-sm rounded-lg font-poppins transition-all duration-150 cursor-pointer
                   ${
                     heuristic === h.id
-                      ? "bg-primary text-secondary border border-primary"
+                      ? "bg-primary text-white border border-primary"
                       : "text-primary"
                   }
                 `}
@@ -88,25 +89,37 @@ export default function Controls({
 
       {/* Solution Navigation - only show when solution exists */}
       {solutionControls && (
-        <div className="flex justify-center space-x-4 mt-4">
-          <SecondaryButton
-            onClick={solutionControls.onPrev}
-            label="Previous"
-            disabled={
-              solutionControls.currentStep === 0 || solutionControls.disabled
-            }
-          />
-          <span className="bg-secondary text-primary px-4 py-2 rounded-lg font-bold">
-            {solutionControls.currentStep + 1} / {solutionControls.totalSteps}
-          </span>
-          <SecondaryButton
-            onClick={solutionControls.onNext}
-            label="Next"
-            disabled={
-              solutionControls.currentStep ===
-                solutionControls.totalSteps - 1 || solutionControls.disabled
-            }
-          />
+        <div className="flex flex-col gap-4 mt-4">
+          {/* Navigation buttons */}
+          <div className="flex justify-center space-x-4">
+            <SecondaryButton
+              onClick={solutionControls.onPrev}
+              label="Previous"
+              disabled={
+                solutionControls.currentStep === 0 || solutionControls.disabled
+              }
+            />
+            <span className="bg-secondary text-primary px-4 py-2 rounded-lg font-bold">
+              {solutionControls.currentStep + 1} / {solutionControls.totalSteps}
+            </span>
+            <SecondaryButton
+              onClick={solutionControls.onNext}
+              label="Next"
+              disabled={
+                solutionControls.currentStep ===
+                  solutionControls.totalSteps - 1 || solutionControls.disabled
+              }
+            />
+          </div>
+
+          {/* Export Solution button - new addition */}
+          <div className="flex justify-center">
+            <SecondaryButton
+              onClick={onExportSolution}
+              label="Save Solution as .txt"
+              disabled={false}
+            />
+          </div>
         </div>
       )}
     </div>

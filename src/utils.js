@@ -1,7 +1,6 @@
 // utils.js - Updated exit detection
 import { twMerge } from "tailwind-merge";
 import { clsx } from "clsx";
-import { Righteous } from "next/font/google";
 
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
@@ -56,6 +55,62 @@ export function parseRushHourFile(content) {
       }
     }
 
+    // Check for left-side K and uniform leading spaces pattern
+    let hasLeadingSpacePattern = true;
+    let standardLeadingSpaces = -1;
+    let leftExitRow = -1;
+
+    // First scan for K at position 0 which would be a left exit
+    for (let i = 2; i < lines.length && i < 2 + rows; i++) {
+      const line = lines[i];
+      if (!line || line.trim() === "") continue;
+      
+      if (line.charAt(0) === 'K') {
+        kCount++;
+        leftExitRow = i - 2; // Convert to board row index
+        exitRow = leftExitRow;
+        exitCol = 0;
+        exitDirection = "left";
+        console.log("Found left exit at row:", leftExitRow);
+      }
+    }
+
+    // If we found a left exit, check if other lines have consistent leading spaces
+    if (leftExitRow !== -1) {
+      // Check the first non-K line to determine the leading space pattern
+      for (let i = 2; i < lines.length && i < 2 + rows; i++) {
+        const line = lines[i];
+        if (!line || line.trim() === "" || i === leftExitRow + 2) continue;
+        
+        let spaceCount = 0;
+        while (spaceCount < line.length && line[spaceCount] === ' ') {
+          spaceCount++;
+        }
+        
+        standardLeadingSpaces = spaceCount;
+        break;
+      }
+      
+      // Verify if all non-K lines have the same leading space pattern
+      for (let i = 2; i < lines.length && i < 2 + rows; i++) {
+        const line = lines[i];
+        if (!line || line.trim() === "" || i === leftExitRow + 2) continue;
+        
+        let spaceCount = 0;
+        while (spaceCount < line.length && line[spaceCount] === ' ') {
+          spaceCount++;
+        }
+        
+        if (spaceCount !== standardLeadingSpaces) {
+          hasLeadingSpacePattern = false;
+          break;
+        }
+      }
+      
+      console.log("Leading spaces pattern:", standardLeadingSpaces);
+      console.log("Has consistent leading spaces:", hasLeadingSpacePattern);
+    }
+
     // Second pass - collect board lines and check for K within them
     let lineWithKIndex = -1;
     let kIndexInLine = -1;
@@ -68,12 +123,31 @@ export function parseRushHourFile(content) {
         continue;
       }
 
-      // Check if line contains K
-      const kIndex = line.indexOf("K");
-      if (kIndex !== -1) {
-        kCount++;
-        lineWithKIndex = boardLines.length; // The current board row index
-        kIndexInLine = kIndex;
+      // Special handling for left exit pattern
+      if (hasLeadingSpacePattern && leftExitRow !== -1) {
+        let processedLine;
+        
+        if (boardLines.length === leftExitRow) {
+          // This is the left exit row - remove the K at position 0
+          processedLine = line.substring(1);
+        } else {
+          // Other rows - remove the standard leading spaces
+          processedLine = line.substring(standardLeadingSpaces);
+        }
+        
+        boardLines.push(processedLine);
+        continue;
+      }
+
+      // Normal processing for other cases
+      // Check if line contains K (if we haven't already found a left exit)
+      if (leftExitRow === -1) {
+        const kIndex = line.indexOf("K");
+        if (kIndex !== -1) {
+          kCount++;
+          lineWithKIndex = boardLines.length; // The current board row index
+          kIndexInLine = kIndex;
+        }
       }
 
       // Process the line for the board - remove K if present
@@ -89,68 +163,70 @@ export function parseRushHourFile(content) {
       boardLines.push(processedLine);
     }
 
-    // Determine exit position and direction based on findings
-    if (standAloneKIndex !== -1) {
-      // Standalone K line found
-      if (standAloneKIndex === 2) {
-        // K is before the board - top exit
-        exitRow = 0;
-        exitCol = standAloneKCol;
-        exitDirection = "up";
-        console.log(
-          "Found standalone K at top:",
-          exitRow,
-          exitCol,
-          exitDirection
-        );
-      } else {
-        // K is after or within the board - likely bottom exit
-        exitRow = Math.min(rows - 1, boardLines.length);
-        exitCol = standAloneKCol;
-        exitDirection = "down";
-        console.log(
-          "Found standalone K at bottom:",
-          exitRow,
-          exitCol,
-          exitDirection
-        );
-      }
-    } else if (lineWithKIndex !== -1) {
-      // K found within a board line
-      exitRow = lineWithKIndex;
-
-      // Determine exit direction based on K position
-      if (kIndexInLine === 0) {
-        // Left edge
-        exitCol = 0;
-        exitDirection = "left";
-      } else if (
-        kIndexInLine >= cols - 1 ||
-        kIndexInLine === lines[lineWithKIndex + 2].length - 1
-      ) {
-        // Right edge 
-        exitCol = cols - 1; 
-        exitDirection = "right";
-      } else if (lineWithKIndex === 0) {
-        // Top edge (but not left or right)
-        exitCol = kIndexInLine;
-        exitDirection = "up";
-      } else if (
-        lineWithKIndex === rows - 1 ||
-        lineWithKIndex === boardLines.length - 1
-      ) {
-        // Bottom edge (but not left or right)
-        exitCol = kIndexInLine;
-        exitDirection = "down";
-      } else {
-        // K is inside the board
-        console.warn("K found inside the board - invalid exit position");
+    // Determine exit position and direction if not already set by left exit pattern
+    if (exitDirection === null) {
+      if (standAloneKIndex !== -1) {
+        // Standalone K line found
+        if (standAloneKIndex === 2) {
+          // K is before the board - top exit
+          exitRow = 0;
+          exitCol = standAloneKCol;
+          exitDirection = "up";
+          console.log(
+            "Found standalone K at top:",
+            exitRow,
+            exitCol,
+            exitDirection
+          );
+        } else {
+          // K is after or within the board - likely bottom exit
+          exitRow = Math.min(rows - 1, boardLines.length);
+          exitCol = standAloneKCol;
+          exitDirection = "down";
+          console.log(
+            "Found standalone K at bottom:",
+            exitRow,
+            exitCol,
+            exitDirection
+          );
+        }
+      } else if (lineWithKIndex !== -1) {
+        // K found within a board line
         exitRow = lineWithKIndex;
-        exitCol = kIndexInLine;
-        exitIsValid = false;
-      }
 
-      console.log("Found K in board line:", exitRow, exitCol, exitDirection);
+        // Determine exit direction based on K position
+        if (kIndexInLine === 0) {
+          // Left edge
+          exitCol = 0;
+          exitDirection = "left";
+        } else if (
+          kIndexInLine >= cols - 1 ||
+          kIndexInLine === lines[lineWithKIndex + 2].length - 1
+        ) {
+          // Right edge 
+          exitCol = cols - 1; 
+          exitDirection = "right";
+        } else if (lineWithKIndex === 0) {
+          // Top edge (but not left or right)
+          exitCol = kIndexInLine;
+          exitDirection = "up";
+        } else if (
+          lineWithKIndex === rows - 1 ||
+          lineWithKIndex === boardLines.length - 1
+        ) {
+          // Bottom edge (but not left or right)
+          exitCol = kIndexInLine;
+          exitDirection = "down";
+        } else {
+          // K is inside the board
+          console.warn("K found inside the board - invalid exit position");
+          exitRow = lineWithKIndex;
+          exitCol = kIndexInLine;
+          exitIsValid = false;
+        }
+
+        console.log("Found K in board line:", exitRow, exitCol, exitDirection);
+      }
     }
 
     // If we found multiple K's, the puzzle is invalid
@@ -241,6 +317,23 @@ export function parseRushHourFile(content) {
       }
     }
 
+    // Count the unique vehicle pieces (excluding P, K, and '.')
+    const uniqueVehicles = new Set();
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        const cell = board[i][j];
+        if (cell !== '.' && cell !== 'P' && cell !== 'K') {
+          uniqueVehicles.add(cell);
+        }
+      }
+    }
+    
+    // Check if the counted vehicles match the declared vehicle count
+    if (uniqueVehicles.size !== vehicleCount) {
+      console.error(`Vehicle count mismatch: Expected ${vehicleCount}, found ${uniqueVehicles.size}`);
+      throw new Error(`Vehicle count mismatch: Expected ${vehicleCount}, found ${uniqueVehicles.size} unique vehicles in the grid.`);
+    }
+
     return {
       size: [rows, cols],
       vehicleCount,
@@ -286,6 +379,75 @@ export function readRushHourFile(file) {
 
     reader.readAsText(file);
   });
+}
+
+/**
+ * Export the solution sequence to a text file for download
+ * @param {Object} initialConfig - Initial board configuration
+ * @param {Array} moves - Array of moves in the solution
+ * @param {string} algorithm - Algorithm used to solve
+ * @param {string} heuristic - Heuristic used (if applicable)
+ * @param {Object} stats - Performance statistics
+ */
+export function exportSolutionToFile(initialConfig, moves, algorithm, heuristic, stats) {
+  try {
+    // Format the solution content
+    let content = "Rush Hour Solution\n";
+    content += "=================\n\n";
+    
+    // Add metadata
+    content += `Algorithm: ${algorithm.toUpperCase()}\n`;
+    if (algorithm === "greedy" || algorithm === "astar") {
+      content += `Heuristic: ${heuristic}\n`;
+    }
+    
+    if (stats) {
+      content += `Nodes visited: ${stats.nodesVisited}\n`;
+      content += `Execution time: ${stats.executionTime}ms\n`;
+    }
+    
+    content += `Total moves: ${moves.length}\n\n`;
+    
+    // Add the move sequence - either use formatMoveSequence if available or create a simple format
+    if (typeof formatMoveSequence === 'function') {
+      content += formatMoveSequence(initialConfig, moves);
+    } else {
+      content += "Initial Board:\n";
+      content += initialConfig.board.map(row => Array.isArray(row) ? row.join('') : row).join('\n');
+      content += "\n\n";
+      
+      // Add each move
+      moves.forEach((move, index) => {
+        content += `Move ${index + 1}: ${move.piece} ${move.direction}`;
+        if (move.distance > 1) {
+          content += ` (${move.distance} steps)`;
+        }
+        content += "\n";
+      });
+    }
+    
+    // Create a Blob and trigger download
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `rush_hour_solution_${algorithm}_${heuristic || 'none'}.txt`;
+    
+    // Trigger download
+    document.body.appendChild(link);
+    link.click();
+    
+    // Clean up
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      document.body.removeChild(link);
+    }, 100);
+    
+    return true;
+  } catch (error) {
+    console.error("Error exporting solution:", error);
+    return false;
+  }
 }
 
 /**

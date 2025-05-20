@@ -5,6 +5,7 @@ import NavBar from "@/components/NavBar";
 import { Heading, Paragraph } from "@/components/Typography";
 import { Board, Controls, Stats, PuzzleInput } from "@/components/RushHour";
 import { solvePuzzle, applyMovesToConfig } from "@/lib/services/gameService";
+import { exportSolutionToFile } from "@/utils";
 
 export default function GamePage() {
   const [boardConfig, setBoardConfig] = useState(null);
@@ -290,6 +291,97 @@ export default function GamePage() {
     setCurrentBoardState(newState);
   }, [boardConfig, solution, currentStep]);
 
+  /**
+   * Handler for exporting the solution to a text file
+   * To be used with the Controls component
+   */
+  const handleExportSolution = () => {
+    // Check if solution exists
+    if (!solution || !solution.moves || !boardConfig) {
+      alert("No solution available to export");
+      return;
+    }
+
+    try {
+      let content = "";
+
+      // Add initial board state
+      content += "Papan Awal\n";
+
+      // Format the board configuration - ensuring it's in the correct format
+      const formatBoard = (board) => {
+        return board
+          .map((row) => {
+            if (Array.isArray(row)) {
+              return row.join("");
+            }
+            return row;
+          })
+          .join("\n");
+      };
+
+      // Add initial board
+      content += formatBoard(boardConfig.board);
+      content += "\n\n";
+
+      // Add each move and resulting board state
+      let currentConfig = { ...boardConfig };
+
+      solution.moves.forEach((move, index) => {
+        // Format direction for display in Indonesian
+        let directionText = move.direction;
+        switch (move.direction) {
+          case "up":
+            directionText = "atas";
+            break;
+          case "down":
+            directionText = "bawah";
+            break;
+          case "left":
+            directionText = "kiri";
+            break;
+          case "right":
+            directionText = "kanan";
+            break;
+        }
+
+        // Format move line exactly as required
+        content += `Gerakan ${index + 1}: ${move.piece}-${directionText}\n`;
+
+        // Apply this move to get the next board state
+        currentConfig = applyMovesToConfig(currentConfig, [move], 0);
+
+        // Add the board state after this move
+        if (currentConfig && currentConfig.board) {
+          content += formatBoard(currentConfig.board);
+          content += "\n\n";
+        }
+      });
+
+      // Create a Blob and trigger download
+      const blob = new Blob([content], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `rush_hour_solution.txt`;
+
+      // Trigger download
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+      }, 100);
+
+      console.log("Solution exported successfully in required format");
+    } catch (error) {
+      console.error("Error exporting solution:", error);
+      alert("Failed to export solution: " + error.message);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-background">
       <NavBar />
@@ -318,83 +410,26 @@ export default function GamePage() {
         {/* Middle column - Algorithm Controls and Stats (20%) */}
         <div className="w-[20%] bg-[#0f172a] p-2 ">
           <div className="bg-[#1e293b] p-3 rounded-xl h-full overflow-y-auto flex flex-col">
-            {/* Algorithm selection */}
-            <div className="space-y-6">
-              <div className="flex justify-center gap-1">
-                {[
-                  { display: "Greedy", value: "greedy" },
-                  { display: "UCS", value: "ucs" },
-                  { display: "A*", value: "astar" },
-                ].map((algo) => (
-                  <button
-                    key={algo.display}
-                    onClick={() => setAlgorithm(algo.value)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium 
-      ${
-        algorithm === algo.value
-          ? "bg-indigo-600 text-white"
-          : "bg-indigo-100 text-indigo-800"
-      }`}
-                  >
-                    {algo.display}
-                  </button>
-                ))}
-              </div>
-
-              {/* Heuristic selection - only show for relevant algorithms */}
-              {(algorithm === "greedy" || algorithm === "astar") && (
-                <div className="flex justify-center gap-1">
-                  {["Manhattan", "Blocking", "Combined"].map((h) => (
-                    <button
-                      key={h}
-                      onClick={() => setHeuristic(h.toLowerCase())}
-                      className={`px-2 py-1.5 rounded-lg text-xs font-medium
-                ${
-                  heuristic === h.toLowerCase()
-                    ? "bg-indigo-600 text-white"
-                    : "bg-indigo-100 text-indigo-800"
-                }`}
-                    >
-                      {h}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              {/* Solve button */}
-              <div className="flex justify-center">
-                <button
-                  onClick={solvePuzzleHandler}
-                  disabled={solving}
-                  className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold uppercase text-xs hover:bg-indigo-700 disabled:opacity-50 w-[80%]"
-                >
-                  {solving ? "Solving..." : "Solve Puzzle"}
-                </button>
-              </div>
-            </div>
-
-            {/* Solution navigation */}
-            {solution && (
-              <div className="flex justify-center items-center gap-1 my-4">
-                <button
-                  onClick={handlePrevStep}
-                  disabled={currentStep === 0 || animating}
-                  className="bg-white text-indigo-800 px-3 py-1 rounded-lg font-medium text-xs disabled:opacity-50"
-                >
-                  Prev
-                </button>
-                <span className="px-2 py-1 bg-white rounded-lg text-indigo-800 font-medium text-xs">
-                  {currentStep + 1} / {solution.moves.length + 1}
-                </span>
-                <button
-                  onClick={handleNextStep}
-                  disabled={currentStep === solution.moves.length || animating}
-                  className="bg-white text-indigo-800 px-3 py-1 rounded-lg font-medium text-xs disabled:opacity-50"
-                >
-                  Next
-                </button>
-              </div>
-            )}
+            <Controls
+              algorithm={algorithm}
+              setAlgorithm={setAlgorithm}
+              heuristic={heuristic}
+              setHeuristic={setHeuristic}
+              onSolve={solvePuzzleHandler}
+              solving={solving}
+              solutionControls={
+                solution
+                  ? {
+                      onNext: handleNextStep,
+                      onPrev: handlePrevStep,
+                      currentStep: currentStep,
+                      totalSteps: solution.moves.length + 1,
+                      disabled: animating,
+                    }
+                  : null
+              }
+              onExportSolution={handleExportSolution} // Add this new prop
+            />
 
             {/* Stats display - using our compact Stats component */}
             {stats && (
@@ -415,22 +450,6 @@ export default function GamePage() {
                 />
               </div>
             )}
-
-            {/* Steps info at bottom when there's a current move */}
-            {solution &&
-              currentStep > 0 &&
-              solution.moves &&
-              solution.moves[currentStep - 1] && (
-                <div className="text-center text-xs font-medium text-indigo-800 mt-2 p-2 bg-white rounded-lg shadow-sm mx-auto max-w-[80%]">
-                  <p>
-                    Step {currentStep}: {solution.moves[currentStep - 1].piece}{" "}
-                    {solution.moves[currentStep - 1].direction}
-                    {solution.moves[currentStep - 1].distance > 1
-                      ? ` (${solution.moves[currentStep - 1].distance} spaces)`
-                      : ""}
-                  </p>
-                </div>
-              )}
           </div>
         </div>
 
