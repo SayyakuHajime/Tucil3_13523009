@@ -19,15 +19,16 @@ export const metadata = {
   title: "Rush Hour Solver",
   description: "Solve Rush Hour puzzles using different pathfinding algorithms",
   icons: {
-    icon: [
-      { url: "/img/rushhour_logo.png" },
-      { url: "/favicon.ico" }
-    ],
-    apple: { url: "/img/rushhour_logo.png" },
+    icon: [{ url: "/images/rushhour_logo.png" }, { url: "/favicon.ico" }],
+    apple: { url: "/images/rushhour_logo.png" },
   },
   manifest: "/manifest.json",
   applicationName: "Rush Hour Solver",
-  appleWebApp: { capable: true, title: "Rush Hour Solver", statusBarStyle: "default" },
+  appleWebApp: {
+    capable: true,
+    title: "Rush Hour Solver",
+    statusBarStyle: "default",
+  },
 };
 
 export default function RootLayout({ children }) {

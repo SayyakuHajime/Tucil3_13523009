@@ -7,17 +7,15 @@ export default function CreatorsPage() {
   return (
     <main className="min-h-screen bg-background flex flex-col items-center p-8 text-foreground">
       <NavBar />
-      
+
       <div className="max-w-4xl mx-auto mt-24 mb-16">
-        <Heading className="mb-8">
-          The Person Behind This Project
-        </Heading>
-        
+        <Heading className="mb-8">The Person Behind This Project</Heading>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <CreatorCard 
+          <CreatorCard
             name="M Hazim R Prajoda"
             nim="13523009"
-            image="/images/car.png" 
+            image="/images/car.png"
             role="Creator"
             description="ngerjain tubes terus sampe jam 4 pagi ini ciri khasnya ni 
             tubes yeyeye tubes tucil tubes tucil tubes tucil tubes tucil, 
@@ -32,14 +30,18 @@ export default function CreatorsPage() {
           />
         </div>
       </div>
-      
+
       <div className="max-w-4xl mx-auto my-8 p-6 bg-secondary rounded-xl shadow-md">
-        <SubheadingRed className="mb-4 text-xl">About the Project</SubheadingRed>
+        <SubheadingRed className="mb-4 text-xl">
+          About the Project
+        </SubheadingRed>
         <Paragraph className="text-center italic">
-          This project was developed as part of the IF2211 Strategi Algoritma course at Institut Teknologi Bandung.
-          The goal was to implement various pathfinding algorithms to solve the Rush Hour puzzle game and compare
-          their effectiveness and efficiency. The project features a web-based interface built with Next.js and React,
-          allowing users to visualize how different algorithms find solutions.
+          This project was developed as part of the IF2211 Strategi Algoritma
+          course at Institut Teknologi Bandung. The goal was to implement
+          various pathfinding algorithms to solve the Rush Hour puzzle game and
+          compare their effectiveness and efficiency. The project features a
+          web-based interface built with Next.js and React, allowing users to
+          visualize how different algorithms find solutions.
         </Paragraph>
       </div>
     </main>
@@ -52,21 +54,27 @@ function CreatorCard({ name, nim, image, role, description }) {
       <div className="p-6">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-20 h-20 rounded-full overflow-hidden">
-            <Image 
-              src={image} 
-              alt={name} 
-              width={80} 
+            <Image
+              src={image}
+              alt={name}
+              width={80}
               height={80}
-              className="object-cover w-full h-full" 
+              className="object-cover w-full h-full"
             />
           </div>
           <div>
             <h3 className="font-bold text-primary font-baloo">{name}</h3>
-            <p className="text-sm text-secondary-foreground font-poppins">{nim}</p>
-            <p className="text-xs text-primary-foreground font-poppins">{role}</p>
+            <p className="text-sm text-secondary-foreground font-poppins">
+              {nim}
+            </p>
+            <p className="text-xs text-primary-foreground font-poppins">
+              {role}
+            </p>
           </div>
         </div>
-        <p className="text-sm text-secondary-foreground font-poppins">{description}</p>
+        <p className="text-sm text-secondary-foreground font-poppins">
+          {description}
+        </p>
       </div>
     </div>
   );
