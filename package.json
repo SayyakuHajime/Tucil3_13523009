@@ -28,7 +28,24 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "<img src=\"src/public/images/maincar.png\" width=\"100px\" align=\"left\">",
+  "main": "next.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SayyakuHajime/tucil3_13523009.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SayyakuHajime/tucil3_13523009/issues"
+  },
+  "homepage": "https://github.com/SayyakuHajime/tucil3_13523009#readme"
+  
 }
