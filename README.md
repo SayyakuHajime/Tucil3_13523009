@@ -1,6 +1,6 @@
 # Penyelesaian Puzzle Rush Hour
 
-<img src="src/public/images/maincar.png" width="100px" align="left">
+<img src="src/public/images/rushhour_logo_removebg.png" width="100px" align="left">
 
 ### `Tugas Kecil 3 IF2211 Strategi Algoritma`
 
