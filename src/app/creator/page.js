@@ -13,7 +13,7 @@ export default function CreatorsPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <CreatorCard
-            name="M Hazim R Prajoda"
+            name="Hajime"
             nim="13523009"
             image="/images/car.png"
             role="Creator"
@@ -37,11 +37,7 @@ export default function CreatorsPage() {
         </SubheadingRed>
         <Paragraph className="text-center italic">
           This project was developed as part of the IF2211 Strategi Algoritma
-          course at Institut Teknologi Bandung. The goal was to implement
-          various pathfinding algorithms to solve the Rush Hour puzzle game and
-          compare their effectiveness and efficiency. The project features a
-          web-based interface built with Next.js and React, allowing users to
-          visualize how different algorithms find solutions.
+          course at Institut Teknologi Bandung. 
         </Paragraph>
       </div>
     </main>
