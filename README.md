@@ -166,53 +166,53 @@ Tucil3_13523009/
 
 ```
 
-struktur projek lebih detail bisa dilihat di bawah
+### struktur projek lebih detail bisa dilihat di bawah:
+
 ```
-src/               
+src/              
 ├── app/            
 │   ├── page.js     # Home page (homepage)
-│   ├── layout.js   # Root layout
-│   ├── globals.css 
+│   ├── layout.js 
+│   ├── globals.css
 │   ├── game/       # Game page
-│   │   └── page.js 
+│   │   └── page.js
 │   └── creator/    # Creator page
-│       └── page.js 
+│       └── page.js
 ├── components/     # Reusable UI components
 │   ├── Button.js      
 │   ├── Typography.js  
 │   ├── NavBar.js      
 │   └── RushHour/        # Komponen khusus game Rush Hour
-│       ├── Board.js     # Komponen papan permainan
-│       ├── Piece.js     # Komponen untuk kendaraan
-│       ├── Controls.js  # Kontrol algoritma dan heuristik
-│       ├── Stats.js     # Komponen statistik hasil
-│       ├── FileInput.js # Komponen upload file puzzle
-│       └── index.js     # Export semua komponen
+│       ├── Board.js     
+│       ├── Piece.js     
+│       ├── Controls.js 
+│       ├── Stats.js   
+│       ├── FileInput.js 
+│       ├── PuzzleInput.js
+│       └── index.js    
 └── lib/                # Core logic
     ├── models.js        # Models (Board, Piece, GameState)
+    ├── services/
+    │   ├── index.js    
+    │   └── gameService.js # Core game functionality  
     ├── algorithms/
-    │   ├── index.js     # Exports all algorithms
-    │   ├── Greedy.js    # Greedy Best First Search
-    │   ├── UCS.js       # Uniform Cost Search
-    │   └── AStar.js     # A* algorithm
+    │   ├── index.js    
+    │   ├── Greedy.js  
+    │   ├── UCS.js      
+    │   └── AStar.js    
     └── heuristics/
-        ├── index.js             # Exports all heuristics
-        ├── ManhattanDistance.js # Manhattan distance heuristic
-        └── BlockingPieces.js    # Blocking pieces heuristic
- 
+        ├── index.js            
+        ├── ManhattanDistance.js
+        ├── BlockingPieces.js  
+        └── CombinedHeuristic.js
 ```
 
 
 ## 👨‍💻 Penulis
 
-- **13523009** - *M Hazim R Prajoda* - [SayyakuHajime](https://github.com/SayyakuHajime)
+- **13523009** - *M Hazim R Prajoda* - [Click this!](https://www.youtube.com/watch?v=yDOx_Duc498&list=OLAK5uy_mcKLDbLqwKH50xTK_TQyJg-tSKFkTnOZ0)
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/a74c896c-bda1-46e1-b409-cdb473e02fda" width="200px">
 </div>
 
-## 🙏 Ucapan Terima Kasih
-
-- Mata kuliah IF2211 Strategi Algoritma di Institut Teknologi Bandung
-- [ThinkFun](https://www.thinkfun.com/) untuk permainan puzzle Rush Hour original
-- [Next.js](https://nextjs.org/) framework untuk antarmuka web
