@@ -144,6 +144,14 @@ Setiap algoritma memiliki performa yang berbeda tergantung pada konfigurasi puzz
 - **UCS**: Menjamin solusi optimal tetapi mungkin lebih lambat pada puzzle kompleks
 - **A***: Sering memberikan keseimbangan terbaik antara kecepatan dan optimalitas
 
+## Testing
+
+
+https://github.com/user-attachments/assets/a7894e19-e712-4e45-b261-096f157d955d
+
+
+
+
 ## 🔍 Struktur Proyek
 
 ```
