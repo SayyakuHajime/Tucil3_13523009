@@ -50,7 +50,7 @@ Aplikasi ini memiliki fitur:
 
 1. Clone repository:
 ```bash
-git clone https://github.com/yourusername/Tucil3_13523009.git
+git clone https://github.com/SayyakuHajime/Tucil3_13523009.git
 cd Tucil3_13523009
 ```
 
@@ -70,18 +70,35 @@ npm run dev
 
 ### Antarmuka Web
 
-1. **Halaman Utama**: Menampilkan antarmuka utama dengan opsi untuk:
-   - Mengunggah file konfigurasi puzzle
-   - Memilih test case yang telah ditentukan
-   - Memilih algoritma dan heuristik
+1. **Halaman Utama**: Memberikan overview aplikasi dengan fitur-fitur:
+   - Pengenalan singkat tentang Rush Hour Puzzle dan algoritma yang diimplementasikan
+   - Tombol "Start Solving" untuk mengarahkan pengguna ke halaman game
+   - Penjelasan singkat tentang keunggulan masing-masing algoritma pathfinding
 
-2. **Halaman Game**: Memvisualisasikan puzzle dan solusi:
-   - Menampilkan papan dengan semua kendaraan
-   - Menampilkan langkah-langkah pergerakan dengan animasi
-   - Menyediakan statistik tentang kualitas solusi dan performa algoritma
+2. **Halaman Game**: Pusat interaksi untuk menyelesaikan puzzle dengan fitur:
+   - **Panel Input Puzzle** - Pilihan multiple untuk input:
+     - Upload file konfigurasi (.txt)
+     - Visual editor untuk membuat puzzle sendiri
+     - Input teks manual dengan format yang ditentukan
+   - **Panel Kontrol Algoritma**:
+     - Pemilihan algoritma (UCS, Greedy, A*)
+     - Pemilihan heuristik untuk Greedy dan A* (Manhattan, Blocking, Combined)
+     - Tombol "Solve Puzzle" untuk memulai pencarian solusi
+   - **Panel Visualisasi Board**:
+     - Tampilan papan interaktif dengan kendaraan berwarna
+     - Primary piece dan pintu keluar yang ditandai jelas
+     - Animasi pergerakan kendaraan saat menjalankan solusi
+   - **Kontrol Navigasi Solusi**:
+     - Tombol Previous/Next untuk langkah-per-langkah
+     - Indikator langkah saat ini (x dari y)
+     - Tombol "Save Solution" untuk mengekspor solusi ke format .txt
+   - **Panel Statistik**:
+     - Jumlah langkah solusi
+     - Jumlah node yang dievaluasi
+     - Waktu eksekusi algoritma
 
-3. **Halaman Pembuat**: Informasi tentang tim di balik proyek ini
-<!-- 
+3. **Halaman Pembuat**: Informasi tentang pembuat di balik tucil ini
+
 ### Format File Input
 
 Program menerima konfigurasi puzzle dalam file teks dengan format berikut:
@@ -107,7 +124,7 @@ GPPCDFK
 GH.III
 GHJ...
 LLJMM.
-``` -->
+```
 
 ## 🌟 Fitur
 
@@ -214,7 +231,6 @@ src/
         ├── BlockingPieces.js  
         └── CombinedHeuristic.js
 ```
-
 
 ## 👨‍💻 Penulis
 
