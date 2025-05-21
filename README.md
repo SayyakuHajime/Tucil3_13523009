@@ -228,7 +228,7 @@ src/
         └── CombinedHeuristic.js
 ```
 
-## 👨‍💻 Penulis
+---
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/9a4262f1-45c6-482d-92d7-771c7f7bd624" width="30%">
