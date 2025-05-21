@@ -234,9 +234,29 @@ src/
 
 ## 👨‍💻 Penulis
 
-- **13523009** - *M Hazim R Prajoda* - [Click this!](https://www.youtube.com/watch?v=yDOx_Duc498&list=OLAK5uy_mcKLDbLqwKH50xTK_TQyJg-tSKFkTnOZ0)
+ <div align="center" id="contributor">
+   <strong>
+     <h3> Author </h3>
+     <table align="center">
+       <tr align="center">
+         <td>NIM</td>
+         <td>Name</td>
+         <td>GitHub</td>
+       </tr>
+       <tr align="center">
+         <td>13523009</td>
+         <td>M Hazim R Prajoda</td>
+         <td><a href="https://github.com/SayyakuHajime">@SayyakuHajime</a></td>
+       </tr>
+     </table>
+   </strong>
+ </div>
+
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/a74c896c-bda1-46e1-b409-cdb473e02fda" width="200px">
 </div>
 
+ <div align="center">
+ Strategi Algoritma • © 2025 
+ </div>
