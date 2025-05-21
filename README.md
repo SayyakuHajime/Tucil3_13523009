@@ -10,23 +10,19 @@
 
 ✨ Aplikasi interaktif untuk menyelesaikan puzzle Rush Hour mengimplementasikan berbagai algoritma pathfinding seperti Greedy Best First Search, Uniform Cost Search (UCS), dan A*. Visualisasikan dan bandingkan berbagai strategi pencarian untuk menemukan solusi optimal agar mobil utama bisa keluar dari kemacetan!
 
-<!-- <div>
-  <a href="#-instalasi">
-    Instalasi
-  </a>
-  •
-  <a href="#-penggunaan">
-    Penggunaan
-  </a>
-  •
-  <a href="#-dokumentasi">
-    Dokumentasi
-  </a>
-  •
-  <a href="#-fitur">
-    Fitur
-  </a>
-</div> -->
+
+
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/21a02130-7a88-4129-a79c-ba9d45986198" width="30%">
+  <p style="font-size: 0.7em; color: gray; margin-top: 5px;">
+    Image Source: <span style="color: #777777;">©HERO ©Daisuke-Hagiwara/SQUARE ENIX</span>
+  </p>
+</div>
+
+
+
+
+
 
 ## 📋 Deskripsi
 
@@ -234,6 +230,10 @@ src/
 
 ## 👨‍💻 Penulis
 
+<div align="center">
+<img src="https://github.com/user-attachments/assets/9a4262f1-45c6-482d-92d7-771c7f7bd624" width="30%">
+</div>
+
  <div align="center" id="contributor">
    <strong>
      <h3> Author </h3>
@@ -251,7 +251,6 @@ src/
      </table>
    </strong>
  </div>
-
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/a74c896c-bda1-46e1-b409-cdb473e02fda" width="200px">
